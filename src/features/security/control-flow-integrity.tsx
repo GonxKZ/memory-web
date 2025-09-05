@@ -107,7 +107,7 @@ export default function ControlFlowIntegrity() {
   
   const [isRunning, setIsRunning] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [history, setHistory] = useState<any[]>([])
+  const [_history, setHistory] = useState<any[]>([])
 
   // Toggle defenses helper
   type DefenseKey = "shadowStack" | "controlFlowGuard" | "randomizedLayout" | "stackCanaries" | "aslr" | "nxBit"

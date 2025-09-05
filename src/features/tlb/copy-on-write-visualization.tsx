@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+// import { Badge } from "@/components/ui/badge"
+// import { Progress } from "@/components/ui/progress"
 
 export default function CopyOnWriteVisualization() {
   const [config, setConfig] = useState({
@@ -28,7 +28,7 @@ export default function CopyOnWriteVisualization() {
   
   const [isRunning, setIsRunning] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [history, setHistory] = useState<any[]>([])
+  const [_history, setHistory] = useState<any[]>([])
 
   // Initialize simulation
   useEffect(() => {

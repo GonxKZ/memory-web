@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
+// import { Badge } from "@/components/ui/badge"
+// import { Progress } from "@/components/ui/progress"
 
 export default function MemoryEncryptionVisualization() {
   const [config, setConfig] = useState({
@@ -88,7 +88,7 @@ export default function MemoryEncryptionVisualization() {
   
   const [isRunning, setIsRunning] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [history, setHistory] = useState<any[]>([])
+  const [_history, setHistory] = useState<any[]>([])
 
   // Initialize memory encryption
   useState(() => {
@@ -114,23 +114,23 @@ export default function MemoryEncryptionVisualization() {
     
     // Initialize encrypted blocks
     const encryptedBlocks = []
-    const blockSize = config.blockSize / 8
-    const numBlocks = Math.ceil(plainText.length / blockSize)
+      const blockSz = config.blockSize / 8
+      const numBlocks = Math.ceil(plainText.length / blockSz)
     
     for (let i = 0; i < numBlocks; i++) {
-      const blockStart = i * blockSize
-      const blockEnd = Math.min(blockStart + blockSize, plainText.length)
+      const blockStart = i * blockSz
+      const blockEnd = Math.min(blockStart + blockSz, plainText.length)
       const plainBlock = plainText.slice(blockStart, blockEnd)
       
       // Pad block if necessary
-      while (plainBlock.length < blockSize) {
+      while (plainBlock.length < blockSz) {
         plainBlock.push(0)
       }
       
       encryptedBlocks.push({
         id: i,
         plainText: plainBlock,
-        cipherText: Array(blockSize).fill(0),
+        cipherText: Array(blockSz).fill(0),
         iv: [...iv],
         key: [...key],
         nonce: [...nonce],

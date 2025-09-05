@@ -2,7 +2,6 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function StoreLoadLab() {
@@ -14,7 +13,7 @@ export default function StoreLoadLab() {
   const [memory, setMemory] = useState<{[key: number]: number}>({ 0: 0, 1: 0 })
   const [consistencyModel, setConsistencyModel] = useState<"sc" | "tso" | "weak">("sc")
   const [results, setResults] = useState<string[]>([])
-  const [isRunning, setIsRunning] = useState(false)
+  const [_isRunning, setIsRunning] = useState(false)
 
   const store = (coreId: number, address: number, value: number) => {
     setCores(prev => 

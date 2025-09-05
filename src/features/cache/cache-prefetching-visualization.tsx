@@ -106,7 +106,7 @@ export default function CachePrefetchingVisualization() {
         coverage: 0
       }
     })
-  }, [])
+  }, [config.cacheSize, config.cacheLineSize])
 
   // Simulate cache prefetching
   const simulateCachePrefetching = async () => {

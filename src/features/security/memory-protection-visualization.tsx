@@ -8,8 +8,6 @@ import { Progress } from "@/components/ui/progress"
 import ExplainPanel from "@/components/learn/ExplainPanel"
 import GuidedFlow from "@/components/learn/GuidedFlow"
 import {
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,

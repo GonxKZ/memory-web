@@ -1,22 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  Legend, 
-  ResponsiveContainer,
-  LineChart,
-  Line
-} from "recharts"
 
 export default function BranchPredictionVisualization() {
   const [config, setConfig] = useState({
@@ -26,12 +13,7 @@ export default function BranchPredictionVisualization() {
     branchPattern: "alternating" as "alternating" | "loop" | "random" | "sequential"
   })
   
-  const [prediction, setPrediction] = useState({
-    taken: true,
-    predicted: true,
-    correct: true,
-    history: [] as number[]
-  })
+  // UI state simplified; prediction details are derived per-iteration
   
   const [stats, setStats] = useState({
     totalPredictions: 0,

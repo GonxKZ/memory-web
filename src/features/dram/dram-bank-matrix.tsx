@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+// import { Badge } from "@/components/ui/badge"
 
 export default function DRAMBankMatrix() {
   const [config, setConfig] = useState({
@@ -14,7 +14,7 @@ export default function DRAMBankMatrix() {
   })
   
   const [accesses, setAccesses] = useState<{bank: number, row: number, col: number, type: string}[]>([])
-  const [currentAccess, setCurrentAccess] = useState(0)
+  const [_currentAccess, setCurrentAccess] = useState(0)
 
   // Simulate memory access pattern
   const simulateAccess = () => {

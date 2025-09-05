@@ -70,7 +70,7 @@ export default function MemoryBandwidthThrottling() {
   
   const [isRunning, setIsRunning] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [history, setHistory] = useState<any[]>([])
+  const [_history, setHistory] = useState<any[]>([])
 
   // Initialize memory bandwidth throttling
   useState(() => {
@@ -422,7 +422,7 @@ export default function MemoryBandwidthThrottling() {
       currentPerformance.qos = parseFloat(qos.toFixed(1))
       
       // Update state
-      setThrottling(prev => ({ ...currentThrottling, performance: { ...currentPerformance } }))
+      setThrottling(() => ({ ...currentThrottling, performance: { ...currentPerformance } }))
       
       // Add to history every 10 steps
       if (step % 10 === 0) {
