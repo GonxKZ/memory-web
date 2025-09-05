@@ -1,6 +1,6 @@
-# Memoria Low-Level
+# Memoria Low‑Level
 
-Una web didáctica e interactiva sobre cómo funciona la memoria a bajo nivel.
+Aplicación web didáctica e interactiva para entender la memoria a bajo nivel.
 
 ## Descripción
 
@@ -44,22 +44,20 @@ Memoria Low-Level es una plataforma educativa interactiva diseñada para enseña
 - Más de 100 términos técnicos en el glosario
 - Contenido bilingüe (español/inglés)
 
-## Tecnologías Utilizadas
+## Tecnologías
 
-- **Frontend**: React 18 + TypeScript
-- **Build**: Vite
-- **Estilo/UI**: Tailwind CSS + shadcn/ui
+- **Frontend**: React 19 + TypeScript
+- **Build**: Vite 7
+- **Estilo/UI**: Tailwind CSS 4, componentes locales (shadcn‑like)
 - **Animaciones**: Framer Motion
-- **Gráficos**: Recharts + visx
+- **Gráficos**: Recharts
 - **Contenido**: MDX
 - **Tipado**: Zod
-- **Estado**: Zustand + XState
+- **Estado**: Zustand y XState
 - **Formularios**: React Hook Form + Zod
 - **Matemáticas**: KaTeX
-- **Código**: Shiki
 - **i18n**: i18next
-- **Persistencia**: localStorage + IndexedDB (Dexie)
-- **Testing**: Vitest + React Testing Library + Playwright
+- **Persistencia**: IndexedDB (Dexie)
 
 ## Estructura del Proyecto
 
@@ -89,28 +87,46 @@ memoria-lowlevel/
 └─ README.md               # Este archivo
 ```
 
-## Instalación
+## Instalación y ejecución
 
-1. Clonar el repositorio:
-```bash
-git clone <url-del-repositorio>
-cd memoria-lowlevel
-```
+Requisitos: Node.js ≥ 18 y npm.
 
-2. Instalar dependencias:
-```bash
-npm install
-```
+- Instalar dependencias (solo la primera vez):
+  ```bash
+  npm install
+  ```
+- Desarrollar (Vite):
+  ```bash
+  npm run dev
+  ```
+- Compilar producción:
+  ```bash
+  npm run build
+  ```
+- Previsualizar `dist/`:
+  ```bash
+  npm run preview
+  ```
 
-3. Iniciar servidor de desarrollo:
-```bash
-npm run dev
-```
+## Diagnóstico rápido
 
-4. Construir para producción:
-```bash
-npm run build
-```
+Hay dos formas de diagnóstico sin bloquear el flujo de trabajo:
+
+- Script simple (sin `npm install`):
+  ```bash
+  bash scripts/diagnose.sh
+  # ejecuta: build + typecheck
+  ```
+
+- Informe breve (logs en `logs/`):
+  ```bash
+  npm run diags
+  # Lanza ESLint y TypeScript a fichero y registra 12s de logs del dev server
+  ```
+
+Notas:
+- El script de diagnóstico no ejecuta `npm install` por diseño.
+- Los diagnósticos están limitados en tiempo para evitar bucles (>2 min).
 
 ## Uso
 
@@ -122,15 +138,27 @@ La plataforma está diseñada para ser utilizada por estudiantes, desarrolladore
 - Consultar el glosario técnico
 - Realizar quizzes para reforzar el aprendizaje
 
+## Calidad de código
+
+- Lint:
+  ```bash
+  npm run lint        # avisos permitidos
+  npm run lint:fix    # aplica arreglos automáticos
+  ```
+- Tipos:
+  ```bash
+  npm run typecheck
+  ```
+- Opcional (estricto, sin avisos):
+  ```bash
+  npm run lint:strict
+  ```
+
 ## Contribución
 
-¡Las contribuciones son bienvenidas! Si deseas contribuir:
-
-1. Haz un fork del repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/nueva-feature`)
-3. Haz commit de tus cambios (`git commit -m 'Agrega nueva feature'`)
-4. Haz push a la rama (`git push origin feature/nueva-feature`)
-5. Abre un Pull Request
+1. Crea una rama (`git checkout -b feat/mi-cambio`).
+2. Ejecuta build y typecheck antes de subir.
+3. Abre un Pull Request.
 
 ## Licencia
 
@@ -138,7 +166,7 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 
 ## Contacto
 
-Para preguntas, sugerencias o reporte de errores, por favor abre un issue en el repositorio.
+Para preguntas, sugerencias o reporte de errores, abre un issue en el repositorio.
 
 ---
 

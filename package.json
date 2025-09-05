@@ -10,6 +10,7 @@
     "typecheck": "tsc -b",
     "lint": "eslint .",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "lint:strict": "eslint . --ext .ts,.tsx --max-warnings=0",
     "preview": "vite preview",
     "lint:report": "node scripts/run-lint-report.mjs",
     "typecheck:report": "node scripts/run-typecheck-report.mjs",

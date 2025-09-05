@@ -1,5 +1,13 @@
 # Memory Web Project - TODO List
 
+## ESLint cleanup to zero warnings
+
+- [ ] Remove unused imports (Badge, Input, Button, Recharts) across `src/features/**`
+- [ ] Complete `useEffect` dependency arrays or refactor where appropriate
+- [ ] Fix `no-useless-escape` in `src/components/lesson-template.tsx`
+- [ ] Use `_` prefix for intentionally unused variables/params
+- [ ] Verify `npm run lint:strict` passes
+
 ## Completed Components
 
 ### Core Visualization Components
