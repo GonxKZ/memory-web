@@ -1,0 +1,24 @@
+export const meta = {
+  title: 'Prefetching: pedir por adelantado con mesura',
+  module: 'Rendimiento',
+  slug: 'prefetching',
+  description: 'Cuándo y cuánto prefetch hacer para convertir fallos en aciertos sin saturar el ancho de banda.'
+}
+
+# Prefetching: pedir por adelantado con mesura
+
+La **predicción** del siguiente dato convierte misses en hits. Pero cada prefetch compite por ancho de banda y puede expulsar líneas útiles.
+
+## Secuencia deductiva
+1. Reconoce el patrón (secuencial, stride, streaming, punteros).
+2. Elige distancia (cuántas iteraciones por delante) y cobertura (cuántas líneas).
+3. Mide hit‑rate adicional y **pollution**: prefetch demasiado agresivo degrada.
+4. Ajusta o desactiva por región caliente; usa prefetch de hardware donde acierta (secuencial) y de software donde el patrón es conocido.
+
+## Consejos
+- Limita prefetch cruzando límites de página (riesgo de fallos TLB añadidos).
+- En estructuras enlazadas, «pointer chasing prefetch» puede ayudar si el coste del miss es alto y el paralelismo de memoria es suficiente.
+
+## Práctica
+- Con la visualización de prefetch, sube distancia y observa si el MR baja sin que el tiempo total suba por congestión del bus.
+

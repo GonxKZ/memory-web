@@ -19,6 +19,8 @@ async function main() {
   await run('npm', ['run', '-s', 'typecheck:report']);
   console.log('=== Step 3: Dev server logs (12s) ===');
   await run('npm', ['run', '-s', 'dev:log', '--', '--duration=12']);
+  console.log('=== Step 4: Unit tests ===');
+  await run('npm', ['run', '-s', 'test:run']);
 
   // Print quick summaries (last 40 lines) if present
   const files = readdirSync(logsDir)

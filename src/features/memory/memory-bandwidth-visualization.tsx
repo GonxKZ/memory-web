@@ -3,8 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-// import { Badge } from "@/components/ui/badge"
-// import { Progress } from "@/components/ui/progress"
+import { Progress } from "@/components/ui/progress"
 
 export default function MemoryBandwidthVisualization() {
   const [config, setConfig] = useState({
@@ -38,7 +37,7 @@ export default function MemoryBandwidthVisualization() {
   
   const [isRunning, setIsRunning] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [history, setHistory] = useState<any[]>([])
+  const [_history, setHistory] = useState<any[]>([])
 
   // Calculate theoretical peak bandwidth
   useState(() => {

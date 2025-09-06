@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 
 export default function MemoryBarriersVisualization() {
@@ -70,7 +69,7 @@ export default function MemoryBarriersVisualization() {
   
   const [isRunning, setIsRunning] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [history, setHistory] = useState<any[]>([])
+  const [_history, setHistory] = useState<any[]>([])
 
   // Initialize barriers simulation
   useState(() => {
@@ -264,7 +263,7 @@ export default function MemoryBarriersVisualization() {
       }
       
       // Check for deadlocks
-      let deadlockDetected = false
+      let _deadlockDetected = false
       for (const lock of currentBarriers.synchronization.locks) {
         if (lock.waiting.length > 0 && lock.owner !== null) {
           // Check if owner is waiting for another lock held by waiting thread
@@ -275,7 +274,7 @@ export default function MemoryBarriersVisualization() {
               if (waitingThread) {
                 // Simplified deadlock detection
                 if (Math.random() > 0.95) {
-                  deadlockDetected = true
+                  _deadlockDetected = true
                   currentPerformance.deadlocks++
                 }
               }
@@ -285,11 +284,11 @@ export default function MemoryBarriersVisualization() {
       }
       
       // Update state
-      setBarriers(prev => ({ ...currentBarriers, performance: { ...currentPerformance } }))
+      setBarriers(_prev => ({ ...currentBarriers, performance: { ...currentPerformance } }))
       
       // Add to history every 10 steps
       if (step % 10 === 0) {
-        setHistory(prev => [...prev, {
+        setHistory(_prev => [..._prev, {
           step,
           dataRaces: currentPerformance.dataRaces,
           deadlocks: currentPerformance.deadlocks,

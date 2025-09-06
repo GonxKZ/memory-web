@@ -1,0 +1,29 @@
+export const meta = {
+  title: 'TLB: atajo de traducción',
+  module: 'TLB y Memoria Virtual',
+  slug: 'tlb',
+  description: 'Qué sucede desde una VA hasta obtener una PA y por qué un hit en TLB importa.'
+}
+
+# TLB: atajo de traducción
+
+El TLB guarda traducciones recientes de VA→PA. Un **hit** evita el costoso page‑walk por la tabla de páginas. El coste de un miss escala con niveles de la tabla y con latencia de memoria.
+
+## Paso a paso
+1. Dividir VA en índices y offset.
+2. Consultar TLB: si acierta, devolver marco físico.
+3. Si falla, page‑walk (varios niveles) y luego insertar en TLB.
+
+## Métrica práctica
+Tiempo medio ≈ `Hit + Miss × (niveles × latencia memoria)`.
+
+## Detalles prácticos
+- TLBs multinivel (L1 TLB muy pequeño y rápido; L2 TLB más grande). En un core moderno suele haber TLBs separados I/D con tamaños distintos.
+- Páginas grandes (2 MiB/1 GiB) reducen presión del TLB (más bytes por entrada) a costa de fragmentación; ideales para regiones estáticas o buffers grandes.
+- Shootdown: cuando cambia un mapeo (p. ej., `munmap()/mprotect()`), hay que invalidar entradas TLB en todos los hilos que las compartan.
+- ASLR: aleatoriza bases para mitigar ataques; interacciona con el TLB vía diversidad de entradas.
+
+## Guía de uso con la visualización
+1. Introduce una VA; observa índices por nivel y el offset.
+2. Activa «páginas grandes» y mide reducción de misses (hit‑rate TLB↑).
+3. Simula un miss reiterado y observa el coste acumulado del page‑walk.

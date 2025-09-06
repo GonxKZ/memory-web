@@ -1,21 +1,11 @@
-import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-// import { Badge } from "@/components/ui/badge"
-// import { Progress } from "@/components/ui/progress"
-import { 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  Legend, 
-  ResponsiveContainer,
-  LineChart,
-  Line
-} from "recharts"
-
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
+import { useState } from "react"
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 export default function MemoryBandwidthSaturation() {
   const [config, setConfig] = useState({
     memoryType: "dram" as "dram" | "l1" | "l2" | "l3" | "hbm" | "gddr",

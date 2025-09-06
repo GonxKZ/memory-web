@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-
 export default function CacheCoherencyProtocols() {
   return (
     <div className="container mx-auto py-8">

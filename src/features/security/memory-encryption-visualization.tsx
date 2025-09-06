@@ -3,8 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-// import { Badge } from "@/components/ui/badge"
-// import { Progress } from "@/components/ui/progress"
+import { Progress } from "@/components/ui/progress"
 
 export default function MemoryEncryptionVisualization() {
   const [config, setConfig] = useState({
@@ -208,7 +207,7 @@ export default function MemoryEncryptionVisualization() {
         cpuOverhead: parseFloat(cpuOverhead.toFixed(1)),
         memoryOverhead: memoryOverhead,
         latency: 10, // ns
-        throughput: parseFloat((encryptionSpeed * 1024 * 1024 / blockSize).toFixed(0))
+        throughput: parseFloat((encryptionSpeed * 1024 * 1024 / blockSz).toFixed(0))
       },
       security: {
         confidentiality,

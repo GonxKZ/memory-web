@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button"
 import { getExplainAndGuided, listLessons, loadLessonComponent } from "@/lessons/registry"
 import ExplainPanel from "@/components/learn/ExplainPanel"
 import GuidedFlow from "@/components/learn/GuidedFlow"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import ErrorBoundary from "@/components/learn/ErrorBoundary"
+import { markVisited } from "@/lib/progress"
 
 export default function LessonRoute() {
   const nav = useNavigate()
@@ -24,6 +26,13 @@ export default function LessonRoute() {
       setComp(() => null)
     }
   }, [match])
+
+  // Marcar progreso al abrir la lección
+  useEffect(() => {
+    if (match?.slug) {
+      try { markVisited(match.slug) } catch {}
+    }
+  }, [match?.slug])
 
   if (!match) {
     return (
@@ -62,19 +71,20 @@ export default function LessonRoute() {
         board={explain.board}
       />
 
-      {guided && <GuidedFlow title={guidedData.title} steps={guidedData.steps} />}
+      {guided && <GuidedFlow title={guidedData.title} steps={guidedData.steps} storageKey={`lesson-guided:${match.slug}`} />}
 
       <Card>
         <CardHeader>
           <CardTitle>Visualización</CardTitle>
         </CardHeader>
         <CardContent>
-          <Suspense fallback={<div className="p-4">Cargando visualización...</div>}>
-            {Comp ? <Comp /> : <div className="p-4">Cargando...</div>}
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<div className="p-4">Cargando visualización...</div>}>
+              {Comp ? <Comp /> : <div className="p-4">Cargando...</div>}
+            </Suspense>
+          </ErrorBoundary>
         </CardContent>
       </Card>
     </div>
   )
 }
-

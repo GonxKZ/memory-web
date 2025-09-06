@@ -11,6 +11,16 @@
     <meta property="og:title" content="Memoria de Bajo Nivel" />
     <meta property="og:description" content="Explora memoria y rendimiento con visualizaciones interactivas." />
     <meta property="og:type" content="website" />
+    <script>
+      (() => {
+        try {
+          const stored = localStorage.getItem('theme')
+          const mq = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const dark = stored ? stored === 'dark' : mq
+          document.documentElement.classList.toggle('dark', dark)
+        } catch {}
+      })()
+    </script>
     <title>Memoria de Bajo Nivel</title>
   </head>
   <body>

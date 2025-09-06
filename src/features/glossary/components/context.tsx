@@ -21,4 +21,3 @@ export function useGlossary() {
   if (!ctx) throw new Error("useGlossary must be used within GlossaryProvider")
   return ctx
 }
-

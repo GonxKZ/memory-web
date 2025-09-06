@@ -1,10 +1,10 @@
 # Memoria Low‑Level
 
-Aplicación web didáctica e interactiva para entender la memoria a bajo nivel.
+Plataforma didáctica e interactiva para entender memoria a bajo nivel (cachés, TLB, DRAM, NUMA, consistencia, seguridad…).
 
 ## Descripción
 
-Memoria Low-Level es una plataforma educativa interactiva diseñada para enseñar conceptos avanzados de gestión de memoria en sistemas informáticos. La plataforma ofrece visualizaciones interactivas, laboratorios prácticos y explicaciones detalladas de temas como:
+Memoria Low‑Level combina visualizaciones interactivas, pasos guiados y contenidos MDX en una ruta de aprendizaje progresiva (de básico a avanzado). Todo está optimizado para navegación de teclado, tema oscuro/claro, búsqueda global y uso como PWA offline. La plataforma cubre:
 
 - Jerarquía de memoria y cachés
 - Traducción de direcciones y TLB
@@ -19,30 +19,22 @@ Memoria Low-Level es una plataforma educativa interactiva diseñada para enseña
 
 ## Características
 
-### 🎓 Aprendizaje Interactivo
-- Lecciones cortas con experimentos interactivos ("toca y aprende")
-- Glosario incremental siempre visible
-- Analogías tipo Feynman y quizzes de refuerzo
+### 🎓 Aprendizaje Deductivo
+- ExplainPanel + GuidedFlow (paso a paso) en cada lección.
+- Temario con ruta sugerida (básico → avanzado) y progreso por módulo.
+- Progreso global (N/M) y botón “Continuar” a la última lección.
 
 ### 🖥️ Visualizaciones Avanzadas
-- Simulaciones de caché con diferentes políticas de reemplazo
-- Visualización de TLB walks y traducción de direcciones
-- Demostraciones de coherencia de caché (MESI, MOESI)
-- Análisis de patrones de acceso y localidad
-- Comparación de asignadores de memoria (Buddy, Slab, etc.)
+- Cachés, TLB, DRAM, NUMA, coherencia/consistencia, asignadores, interleaving, etc.
+- Contenidos MDX ampliados que conectan teoría y práctica.
 
-### 🧪 Laboratorios Prácticos
-- Laboratorio de Stride para entender patrones de acceso
-- Simulador de False Sharing para optimización de rendimiento
-- Demostración de prefetching y sus efectos
-- Visualización de técnicas de empaquetado de datos
-- Análisis de modelos de consistencia de memoria
+### 🔎 Búsqueda y Accesibilidad
+- Búsqueda global (Ctrl/⌘+K) de lecciones y contenidos.
+- Teclado en GuidedFlow (←/→) y deep‑links (?step=N).
+- Tema oscuro/claro y enlace “Saltar al contenido”.
 
-### 📚 Contenido Completo
-- Más de 20 módulos educativos
-- Más de 50 componentes interactivos
-- Más de 100 términos técnicos en el glosario
-- Contenido bilingüe (español/inglés)
+### 📱 PWA
+- Botón “Instalar” en navegadores compatibles, experiencia offline básica.
 
 ## Tecnologías
 
@@ -87,6 +79,11 @@ memoria-lowlevel/
 └─ README.md               # Este archivo
 ```
 
+## Rutas y atajos
+
+- Rutas: `/`, `/lessons`, `/lesson/:slug`, `/temario`, `/docs`.
+- Atajos: `Ctrl/⌘+K` (búsqueda), `←/→` (siguiente/anterior paso en GuidedFlow).
+
 ## Instalación y ejecución
 
 Requisitos: Node.js ≥ 18 y npm.
@@ -110,33 +107,16 @@ Requisitos: Node.js ≥ 18 y npm.
 
 ## Diagnóstico rápido
 
-Hay dos formas de diagnóstico sin bloquear el flujo de trabajo:
-
 - Script simple (sin `npm install`):
   ```bash
   bash scripts/diagnose.sh
   # ejecuta: build + typecheck
   ```
-
 - Informe breve (logs en `logs/`):
   ```bash
   npm run diags
-  # Lanza ESLint y TypeScript a fichero y registra 12s de logs del dev server
+  # Lanza ESLint y TypeScript a fichero, registra logs y ejecuta tests
   ```
-
-Notas:
-- El script de diagnóstico no ejecuta `npm install` por diseño.
-- Los diagnósticos están limitados en tiempo para evitar bucles (>2 min).
-
-## Uso
-
-La plataforma está diseñada para ser utilizada por estudiantes, desarrolladores y profesionales que quieran entender cómo funciona la memoria a bajo nivel. Puedes:
-
-- Navegar por los módulos de aprendizaje
-- Interactuar con las visualizaciones
-- Realizar experimentos en los laboratorios
-- Consultar el glosario técnico
-- Realizar quizzes para reforzar el aprendizaje
 
 ## Calidad de código
 
@@ -153,6 +133,29 @@ La plataforma está diseñada para ser utilizada por estudiantes, desarrolladore
   ```bash
   npm run lint:strict
   ```
+
+## Scripts útiles
+
+```bash
+# limpieza rápida
+npm run clean
+
+# chequeos y logs (incluye tests)
+npm run diags
+
+# diagnóstico simple (build+tsc)
+bash scripts/diagnose.sh
+
+# podar/normalizar imports en features
+node scripts/prune-imports.mjs
+node scripts/repair-recharts-imports.mjs
+node scripts/fix-import-newlines.mjs
+```
+
+## Tests y CI
+
+- Tests unitarios con Vitest + Testing Library: `npm run test` / `npm run test:run`.
+- CI en GitHub Actions: typecheck, lint, tests y build en cada PR.
 
 ## Contribución
 

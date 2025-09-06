@@ -120,8 +120,9 @@
 - [ ] XState Machines Integration
 
 ### Testing Framework
-- [ ] Unit Tests Setup
-- [ ] Integration Tests
+- [x] Unit Tests Setup (Vitest + RTL)
+- [x] Core unit tests (registry, ErrorBoundary, routing)
+- [ ] Integration Tests (features smoke tests)
 - [ ] End-to-End Tests with Playwright
 
 ### Documentation and Content
@@ -131,9 +132,9 @@
 - [ ] Quiz Components
 
 ### Deployment Preparation
-- [ ] Build Optimization
+- [x] Build Optimization (code splitting, PWA, compression)
 - [ ] Performance Auditing
-- [ ] Accessibility Compliance
+- [ ] Accessibility Compliance (a11y pass on key screens)
 - [ ] SEO Optimization
 
 ## Remaining Tasks
@@ -143,7 +144,27 @@
 - [ ] Memory Profiler Integration
 - [ ] Custom Visualization Builder
 - [ ] Collaborative Learning Features
-- [ ] Progress Tracking and Analytics
+- [x] Progress Tracking (persist GuidedFlow per lección)
+
+## 2025-09-05 — Estado y mejoras aplicadas
+
+- [x] Limpieza: `logs/` y `dist/` en .gitignore; script `doctor --clean`.
+- [x] Estructura: Router envuelto en `Layout` común (header/footer) para todas las páginas.
+- [x] Robustez: `ErrorBoundary` alrededor de visualizaciones dinámicas en `/lesson/*`.
+- [x] Import fixes: React UI (`Badge`, `Progress`) unificados y tipados corrigiendo `tsc`.
+- [x] GuidedFlow: persistencia en `localStorage` + stepper clicable.
+- [x] Diagnóstico: `scripts/doctor.mjs` (env, puerto, tsc, eslint, build).
+- [x] CI: GitHub Actions con `typecheck`, `lint`, `test`, `build`.
+- [x] Tests: Vitest + Testing Library configurados y 3 suites básicas pasando.
+
+## Próximos pasos sugeridos
+
+- [ ] Añadir pruebas de humo (render) para 8–10 visualizaciones críticas.
+- [ ] Medir Web Vitals en producción y enviar a `logs/` opcional.
+- [ ] Añadir toggle de tema (oscuro/claro) global con persistencia.
+- [ ] Accesibilidad: foco visible, roles/aria en componentes interactivos, contraste Tailwind.
+- [ ] Internacionalización: activar i18n y revisar cadenas en `src/app` y `src/features`.
+- [ ] E2E: Playwright para rutas clave (`/`, `/lessons`, `/lesson/*`).
 
 ### Educational Content
 - [ ] Video Tutorial Integration

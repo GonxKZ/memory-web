@@ -1,0 +1,26 @@
+export const meta = {
+  title: 'NUMA: acerca cómputo a datos',
+  module: 'NUMA',
+  slug: 'numa',
+  description: 'Minimiza latencia remota moviendo hilos o páginas.'
+}
+
+# NUMA: acerca cómputo a datos
+
+La memoria local es más rápida. Afinar afinidad de hilos y migrar páginas calientes reduce la latencia media.
+
+## Pasos
+1. Medir accesos locales/remotos.
+2. Fijar afinidad de hilos.
+3. Migrar páginas calientes.
+4. Ver balance entre nodos.
+
+## Deductivo en detalle
+1. Observa latencia media L = (nL·LLoc + nR·LRem) / (nL + nR). Si nR es significativo, hay trabajo.
+2. Política «first‑touch»: el primer hilo que toque una página decide su nodo; inicializaciones secuenciales pueden sesgar el reparto.
+3. Afinidad: fija hilos productores/consumidores al nodo de sus datos.
+4. Migración: mueve páginas calientes al nodo predominante de acceso (autonuma, numactl/interleave/bind).
+
+## Práctica
+- Con la visualización NUMA, mueve hilos entre nodos y cuantifica la reducción de accesos remotos.
+- Interleave en múltiples nodos cuando el patrón es amplio y compartido.

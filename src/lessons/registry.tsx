@@ -177,6 +177,124 @@ export function getExplainAndGuided(slug: string): { explain: LessonExplain; gui
     }
   }
 
+  if (lower.includes("cache") || lower.includes("replacement")) {
+    return {
+      explain: {
+        title: "Pensar en cachés",
+        metaphor: "Estanterías con huecos limitados: qué guardo y qué saco.",
+        idea: "Localidad + (conjunto, asociatividad, política) determinan el hit‑rate.",
+        bullets: ["Tamaño línea", "Índice→conjunto", "LRU/FIFO/RR"],
+        board: { title: "Miss ratio", content: "MR ≈ f(working set, asociatividad, política)" },
+      },
+      guided: {
+        title: "De acceso a decisión",
+        steps: [
+          { title: "Localidad", content: "Identifica patrón temporal/espacial." },
+          { title: "Mapeo", content: "Address→(conjunto, vía)." },
+          { title: "Política", content: "¿Cuál se expulsa?" },
+          { title: "Medir", content: "Hits, misses y CPI." },
+        ],
+      },
+    }
+  }
+
+  if (lower.includes("allocators") || lower.includes("allocator")) {
+    return {
+      explain: {
+        title: "Asignadores",
+        metaphor: "Cajoneras de distintos tamaños para no desperdiciar espacio.",
+        idea: "Buddy/Slab/JEmalloc equilibran fragmentación vs. rapidez.",
+        bullets: ["Interna/Externa", "Tallas", "Caches de objetos"],
+        board: { title: "Objetivo", content: "Baja fragmentación con throughput alto." },
+      },
+      guided: {
+        title: "De petición a bloque",
+        steps: [
+          { title: "Talla", content: "Redondeo/clase." },
+          { title: "Reserva", content: "Lista libre/página/slab." },
+          { title: "Liberación", content: "Coalescer o devolver al slab." },
+          { title: "Métricas", content: "Fragmentación y latencia." },
+        ],
+      },
+    }
+  }
+
+  if (lower.includes("consistency") || lower.includes("barriers") || lower.includes("synchronization")) {
+    return {
+      explain: {
+        title: "Consistencia y sincronización",
+        metaphor: "Semáforos y señales para cruzar sin choques.",
+        idea: "Modelo (TSO/SC/etc.) y barreras ordenan efectos de memoria.",
+        bullets: ["SC vs TSO", "Acquire/Release", "Fences"],
+        board: { title: "Regla", content: "Sin orden explícito ⇒ reordenamientos posibles." },
+      },
+      guided: {
+        title: "De código a orden",
+        steps: [
+          { title: "Detectar riesgo", content: "Races, dependencias." },
+          { title: "Elegir primitiva", content: "Lock/atomic/barrier." },
+          { title: "Verificar", content: "¿Se cumple el orden?" },
+          { title: "Medir coste", content: "Impacto en latencia." },
+        ],
+      },
+    }
+  }
+
+  if (lower.includes("gpu")) {
+    return {
+      explain: {
+        title: "Memoria GPU",
+        metaphor: "Carriles masivos: muchas bicis a la vez.",
+        idea: "Coalescing y jerarquía distinta (LDS/Shared) condicionan el throughput.",
+        bullets: ["Coalescing", "Shared/Global", "Occupancy"],
+        board: { title: "Objetivo", content: "Maximo coalescing para BW alto." },
+      },
+      guided: {
+        title: "De hilo a transacción",
+        steps: [
+          { title: "Patrón", content: "Stride y alineación." },
+          { title: "Agrupar", content: "Coalescer accesos." },
+          { title: "Compartida", content: "Evitar bank conflicts." },
+          { title: "Medir", content: "BW y ocupación." },
+        ],
+      },
+    }
+  }
+
+  if (lower.includes("dram")) {
+    return {
+      explain: {
+        title: "DRAM práctica",
+        metaphor: "Levantar y bajar una persiana (fila).",
+        idea: "Fila activa reduce latencias; conflictos las aumentan.",
+        bullets: ["tRAS/tRCD", "Open/Close", "Conflictos"],
+        board: { title: "Coste", content: "Hit en fila ≪ Miss de fila." },
+      },
+      guided: {
+        title: "Acceso a banco",
+        steps: [
+          { title: "Decodificar", content: "Banco/Fila/Col." },
+          { title: "Activación", content: "Abrir fila." },
+          { title: "R/W", content: "Latencias típicas." },
+          { title: "Patrones", content: "Evitar conflictos." },
+        ],
+      },
+    }
+  }
+
+  if (lower.includes("mapping") || lower.includes("bandwidth")) {
+    return {
+      explain: {
+        title: "Mapeo y BW",
+        metaphor: "Repartir cajas en varios camiones.",
+        idea: "El mapeo a módulos/bancos determina paralelismo y BW.",
+        bullets: ["Bloques", "Bancos", "Paralelismo"],
+        board: { title: "Paralelismo", content: "Más módulos activos ⇒ más BW." },
+      },
+      guided: guidedDefault,
+    }
+  }
+
   if (lower.includes("optimization")) {
     return {
       explain: {
@@ -197,4 +315,3 @@ export async function loadLessonComponent(path: string): Promise<React.Component
   const mod = (await files[path]()) as any
   return mod.default as React.ComponentType<any>
 }
-

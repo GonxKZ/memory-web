@@ -1,0 +1,22 @@
+export const meta = {
+  title: 'Memoria segura: ECC, NX y cifrado',
+  module: 'Seguridad',
+  slug: 'security',
+  description: 'Integridad (ECC), permisos (NX) y confidencialidad (cifrado).'
+}
+
+# Memoria segura: ECC, NX y cifrado
+
+ECC corrige errores de 1 bit; NX evita ejecutar datos; el cifrado mitiga exposición física.
+
+## Coste/beneficio
+- Overhead de bits y latencia vs. riesgo mitigado.
+
+## Deductivo
+1. Amenaza → mitigación directa: bit‑flips (ECC), ejecución de datos (NX), robo físico/RAM dump (cifrado en reposo).
+2. ECC SECDED añade bits de paridad para detectar 2 y corregir 1; en canales con chip extra, el coste físico lo absorbe el módulo.
+3. NX (eXecute Disable) marca páginas como no ejecutables; combinada con ASLR y W^X reduce ROP/shellcode trivial.
+4. Cifrado de memoria: XTS en discos; en RAM, tecnologías como SME/SEV cifran páginas con claves por VM o por sistema.
+
+## Práctica
+- Activa «protección» en las visualizaciones y observa el impacto en latencia y throughput.

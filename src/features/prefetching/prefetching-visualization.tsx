@@ -1,23 +1,12 @@
-import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-// import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import ExplainPanel from "@/components/learn/ExplainPanel"
 import GuidedFlow from "@/components/learn/GuidedFlow"
-import {
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  LineChart,
-  Line
-} from "recharts"
-
+import { useState } from "react"
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 export default function MemoryPrefetchingVisualization() {
   const [config, setConfig] = useState({
     prefetcherType: "stream" as "stream" | "stride" | "ml" | "none",

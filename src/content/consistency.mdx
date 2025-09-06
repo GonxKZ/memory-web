@@ -1,0 +1,23 @@
+export const meta = {
+  title: 'Consistencia y sincronización',
+  module: 'Consistencia',
+  slug: 'consistency',
+  description: 'SC/TSO y barreras: ordenar efectos de memoria.'
+}
+
+# Consistencia y sincronización
+
+Los procesadores reordenan. Los modelos (SC, TSO, …) y las **barreras** restablecen el orden observable.
+
+## Recetas
+- Acquire/Release para regiones críticas.
+- Fences para dependencias de datos.
+
+## Deductivo
+1. Especifica «qué debe verse» (modelo): SC (secuencia global única), TSO (cargas no pasan a cargas; stores se pueden adelantar con buffer), RC (adquiere/ libera).
+2. Identifica carreras: dos accesos, al menos uno escritura, sin orden sincronizado.
+3. Inserta sincronización mínima: locks (SC), atomics con `acquire/release`, o `seq_cst` cuando la intuición falla.
+4. Valida: tests de litmus y/o herramientas (TSAN, model checkers simples).
+
+## Ejemplo rápido
+Productor/consumidor: productor escribe datos y luego `store_release` del flag; consumidor hace `load_acquire` del flag antes de leer datos.

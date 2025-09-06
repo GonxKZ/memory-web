@@ -1,0 +1,29 @@
+export const meta = {
+  title: 'DRAM: fila activa y conflictos',
+  module: 'DRAM',
+  slug: 'dram',
+  description: 'Por qué abrir una fila ayuda y los conflictos la empeoran.'
+}
+
+# DRAM: fila activa y conflictos
+
+Al acceder a DRAM, si la fila ya está activa el acceso es más rápido (row‑buffer hit). Cambiar de fila implica precharge/activate.
+
+## Claves
+- Política de fila: open‑page vs close‑page.
+- tRCD, tRAS y tRP determinan latencias.
+- El patrón de acceso puede generar conflictos de banco.
+
+## Secuencia deductiva
+1. Dirección física → (canal, rango, banco, fila, columna). El mapeo decide paralelismo y probabilidad de conflictos.
+2. Si la fila es la misma que la activa → hit de fila (latencia baja). Si es distinta → precharge+activate (latencia alta).
+3. Planificador (p. ej., FR‑FCFS) prioriza hits de fila para subir el throughput; puede aumentar varianza de latencia.
+4. Refresh: cada **tREFI** filas deben refrescarse, introduciendo burbujas; el impacto crece con densidad y temperatura.
+
+## Patrones y consejos
+- Accesos «zig‑zag» entre dos filas del mismo banco producen misses de fila constantes. Una reordenación por bloques reduce cambios de fila.
+- Interleaving por banco/canal reparte carga y reduce hot‑spots.
+
+## Con la visualización
+1. Activa varios bancos y genera accesos; observa la matriz y la tasa de conflictos.
+2. Cambia de política open/close page y compara latencia y utilización.

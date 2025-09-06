@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-// import { Badge } from "@/components/ui/badge"
 import { CopyIcon, CheckIcon } from "lucide-react"
 
 export default function EndiannessConverter() {
@@ -66,7 +65,7 @@ export default function EndiannessConverter() {
       } else {
         setConverted(convertedValue.toString(2).padStart(32, '0'))
       }
-    } catch (_e) {
+    } catch {
       setConverted("Error en conversión")
       setByteArray([])
     }

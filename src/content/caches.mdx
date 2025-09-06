@@ -1,0 +1,46 @@
+export const meta = {
+  title: 'Cachés: de la localidad a la política',
+  module: 'Cachés',
+  slug: 'caches',
+  description: 'Cómo la localidad, el mapeo y las políticas determinan el hit‑rate.'
+}
+
+# Cachés: de la localidad a la política
+
+La idea clave es que los programas muestran **localidad temporal y espacial**. Una caché explota esto almacenando bloques recientes. Desde ahí, todo se deduce con tres preguntas: (1) ¿qué bloques caben?, (2) ¿dónde puede caer cada bloque?, y (3) si hay conflicto, ¿a quién echo?
+
+## Objetivos de aprendizaje
+- Entender tamaño de línea, conjunto y asociatividad.
+- Diferenciar LRU, FIFO y Random.
+- Relacionar el patrón de acceso con el hit‑rate.
+
+## Secuencia deductiva
+1. Localidad → agrupar en líneas (tamaño de línea). Más grande reduce «compulsory» pero puede aumentar polución de caché.
+2. Dirección → (conjunto, vía) (mapeo directo, N‑vías, totalmente asociativa). El mapeo restringe ubicaciones posibles.
+3. Demanda > capacidad del conjunto → conflicto. La política (LRU/FIFO/RR) decide la víctima; LRU aproxima al óptimo con coste.
+4. Clasificar fallos (3C de Hill): compulsory (fríos), capacity (no cabe el working set), conflict (restricción del mapeo). Mide por diferencia vs. caché totalmente asociativa de igual tamaño para separar conflictos; el resto (no obligatorios) en FA son capacidad.
+5. Optimizar: aumentar asociatividad ↓conflictos; aumentar tamaño ↓capacidad; ajustar línea ↓compulsory. Compromisos: latencia/área/energía.
+
+## Métricas y reglas rápidas
+- Miss ratio (MR) ≈ f(localidad, tamaño, asociatividad, política). Hit time ↑ con asociatividad grande; suele bastar 8‑vías para aproximar FA.
+- 3C: compulsory (primera referencia), capacity (tamaño insuficiente), conflict (pocas vías). En multicores aparece un 4º C: coherence.
+- Prefetch reduce compulsory/capacity, pero puede aumentar conflictos y consumo de BW si predice mal.
+
+## Patrones típicos
+- Secuencial: línea grande ayuda; el hardware prefetcher acierta y MR↓.
+- Stride: si stride ≈ número de conjuntos, se producen conflictos sistemáticos (patrón clásico para ver diferencias entre 1, 2 y 8‑vías).
+- Estructuras dispersas: agrupar campos (SoA vs AoS) para mejorar localidad y reducir MR.
+
+## Práctica guiada (con la visualización)
+1. Elige mapeo directo (1‑vía), línea 64B. Ejecuta acceso stride=conjuntos → observa MR alto por conflictos.
+2. Sube a 8‑vías; repite → los conflictos desaparecen casi por completo con mismo tamaño total.
+3. Aumenta tamaño de caché manteniendo 2‑vías → observa caída de capacidad misses y punto de saturación.
+
+## «Checklist» de diseño
+- ¿El working set de la fase crítica cabe? Si no, trocea en bloques (tiling) para explotar localidad temporal.
+- ¿Los índices de estructuras hash colisionan en el mismo conjunto? Aplica «page/coloring» o dispersión de índices.
+- ¿Línea demasiado grande? Mide BW y polución; líneas enormes pueden degradar por «fetch inútil».
+
+## Lecturas sugeridas
+- Taxonomía 3C (compulsory/capacity/conflict) y medidas prácticas.
+- Capítulos de cachés en textos de arquitectura contemporánea.

@@ -1,0 +1,22 @@
+export const meta = {
+  title: 'Mapeo e Interleaving: más BW',
+  module: 'Rendimiento',
+  slug: 'mapping-bw',
+  description: 'Distribuir direcciones en módulos/bancos para paralelizar.'
+}
+
+# Mapeo e Interleaving: más BW
+
+El interleaving reparte bloques entre módulos/bancos para activar más canales en paralelo.
+
+## Tipos
+- Bit/Word/Page/Bank interleaving.
+- Equilibrio vs. localidad.
+
+## Secuencia deductiva
+1. Dirección → número de bloque.
+2. Función de reparto → módulo/banco (`block % N`, o usando bits intermedios para evitar aliasing con strides).
+3. Medir: más módulos activos ⇒ mayor BW efectivo, pero cuidado con colisiones periódicas para ciertos strides.
+
+## Con la visualización
+- Cambia el tipo de interleaving y observa uso por módulo, balance y throughput.

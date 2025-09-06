@@ -50,31 +50,24 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      <header className="bg-white shadow sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Memoria de Bajo Nivel
-              </h1>
-              <p className="text-gray-600 text-sm">
-                Visualización Interactiva
-              </p>
-            </div>
-            <button 
-              className="md:hidden bg-gray-200 p-2 rounded-lg"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
+    <div className="container mx-auto px-4 py-6">
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Memoria de Bajo Nivel</h1>
+          <p className="text-gray-600 text-sm">Visualización Interactiva</p>
         </div>
-      </header>
+        <button 
+          className="md:hidden bg-gray-200 p-2 rounded-lg"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Abrir menú"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
 
-      <div className="flex flex-1 container mx-auto px-4 py-6">
+      <div className="flex gap-6">
         {/* Menú lateral - visible en escritorio, toggle en móviles */}
         <div 
           className={`bg-white rounded-lg shadow p-4 md:block md:w-1/4 mr-6 transition-all duration-300 ease-in-out ${
@@ -133,27 +126,6 @@ function App() {
           <MemoryConcept concept={activeConcept} />
         </div>
       </div>
-
-      <footer className="bg-white border-t mt-auto">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-center text-gray-600 mb-2 md:mb-0">
-              © {new Date().getFullYear()} Visualización de Conceptos de Memoria de Bajo Nivel
-            </p>
-            <div className="flex space-x-4">
-              <button className="text-gray-500 hover:text-gray-700">
-                Acerca de
-              </button>
-              <button className="text-gray-500 hover:text-gray-700">
-                Contacto
-              </button>
-              <button className="text-gray-500 hover:text-gray-700">
-                Privacidad
-              </button>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

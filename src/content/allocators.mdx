@@ -1,0 +1,22 @@
+export const meta = {
+  title: 'Asignadores: tallas y fragmentación',
+  module: 'Asignadores',
+  slug: 'allocators',
+  description: 'Buddy, Slab, arenas: reducir fragmentación sin perder rendimiento.'
+}
+
+# Asignadores: tallas y fragmentación
+
+Un asignador agrupa peticiones en clases de talla. Buddy coalescea bloques, Slab mantiene caches de objetos.
+
+## Métricas
+- Fragmentación (interna/externa), latencia de alloc/free, tasa de fallos de caché.
+
+## Secuencia deductiva
+1. Distribución de tamaños → define clases (bins). Muchas clases ↓fragmentación interna pero ↑metadatos/tiempo.
+2. Temporalidad → caches de objetos (slab) para recorridos frecuentes de la misma talla.
+3. Concurrencia → arenas/particiones por hilo para reducir contención.
+4. Rendimiento sostenido → reciclaje y coalescing para evitar fragmentación externa.
+
+## Práctica con la visualización
+- Compara malloc (generalista) vs buddy (coalescing) vs slab (objetos fijos) en patrón mixto; observa fragmentación y latencias.
