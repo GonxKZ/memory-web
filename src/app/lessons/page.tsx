@@ -36,12 +36,12 @@ export default function LessonsPage() {
           return (
             <Card key={moduleName}>
               <CardHeader>
-                <CardTitle className="flex items-center justify-between">
+                <CardTitle role="heading" aria-level={2} className="flex items-center justify-between">
                   <span>{moduleName}</span>
                   <span className="text-xs text-gray-600">{done}/{total}</span>
                 </CardTitle>
                 <div className="px-6 pb-2">
-                  <Progress value={pct} />
+                  <Progress aria-label={`Progreso del módulo ${moduleName}: ${done} de ${total}`} value={pct} />
                 </div>
               </CardHeader>
               <CardContent>

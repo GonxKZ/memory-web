@@ -94,7 +94,7 @@ export default function TemarioPage() {
       <div className="mb-10">
         <Card>
           <CardHeader>
-            <CardTitle>Ruta sugerida (básico → avanzado)</CardTitle>
+            <CardTitle role="heading" aria-level={2}>Ruta sugerida (básico → avanzado)</CardTitle>
           </CardHeader>
           <CardContent>
             <ol className="space-y-3">
@@ -126,9 +126,9 @@ export default function TemarioPage() {
           const intro = key ? moduleIntro[key] : { intro: "", sequence: [] }
           const eg = getExplainAndGuided((items[0]?.slug ?? '').toLowerCase())
           return (
-            <Card key={moduleName}>
+          <Card key={moduleName}>
               <CardHeader>
-                <CardTitle className="flex items-center justify-between">
+                <CardTitle role="heading" aria-level={2} className="flex items-center justify-between">
                   <span className="flex items-center gap-2">
                     {moduleName}
                     {items.every(l => visited.has(l.slug)) && (
